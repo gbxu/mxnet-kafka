@@ -290,8 +290,8 @@ endif
 $(info Running CUDA_ARCH: $(CUDA_ARCH))
 endif
 
-# ps-lite
-PS_PATH=$(ROOTDIR)/3rdparty/ps-lite
+# ps-kafka
+PS_PATH=$(ROOTDIR)/3rdparty/ps-kafka
 DEPS_PATH=$(shell pwd)/deps
 include $(PS_PATH)/make/ps.mk
 ifeq ($(USE_DIST_KVSTORE), 1)
@@ -435,9 +435,9 @@ ifeq ($(UNAME_S), Darwin)
 endif
 endif
 
-$(PS_PATH)/build/libps.a: PSLITE
+$(PS_PATH)/build/libps.a: PSKAFKA
 
-PSLITE:
+PSKAFKA:
 	$(MAKE) CXX=$(CXX) DEPS_PATH=$(DEPS_PATH) -C $(PS_PATH) ps
 
 $(DMLC_CORE)/libdmlc.a: DMLCCORE
