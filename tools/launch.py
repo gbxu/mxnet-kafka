@@ -88,6 +88,10 @@ def main():
                         all environment variables which are set are copied.')
     parser.add_argument('command', nargs='+',
                         help = 'command for launching the program')
+
+    parser.add_argument('-b', '--brokers', required=True, type=str,
+                        help = 'kafka bootstrap-server ')# gbxu
+
     args, unknown = parser.parse_known_args()
     args.command += unknown
     if args.num_servers is None:
