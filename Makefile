@@ -297,7 +297,7 @@ include $(PS_PATH)/make/ps.mk
 ifeq ($(USE_DIST_KVSTORE), 1)
 	CFLAGS += -DMXNET_USE_DIST_KVSTORE -I$(PS_PATH)/include -I$(DEPS_PATH)/include
 	LIB_DEP += $(PS_PATH)/build/libps.a
-	LDFLAGS += $(PS_LDFLAGS_A)
+	LDFLAGS += $(PS_LDFLAGS_A) -lrdkafka -lz -lpthread -lrt
 endif
 
 .PHONY: clean all extra-packages test lint docs clean_all rcpplint rcppexport roxygen\
