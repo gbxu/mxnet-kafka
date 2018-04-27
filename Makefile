@@ -49,9 +49,9 @@ ifndef DLPACK_PATH
 	DLPACK_PATH = $(ROOTDIR)/3rdparty/dlpack
 endif
 
-#ifndef AMALGAMATION_PATH
-#	AMALGAMATION_PATH = $(ROOTDIR)/amalgamation
-#endif
+ifndef AMALGAMATION_PATH
+	AMALGAMATION_PATH = $(ROOTDIR)/amalgamation
+endif
 
 ifneq ($(USE_OPENMP), 1)
 	export NO_OPENMP = 1
@@ -128,10 +128,9 @@ endif
 
 # setup opencv
 ifeq ($(USE_OPENCV), 1)
-#CFLAGS += -DMXNET_USE_OPENCV=1 $(shell pkg-config --cflags opencv)
-#	CFLAGS += -DMXNET_USE_OPENCV=1 -I/usr/include/opencv2
+	CFLAGS += -DMXNET_USE_OPENCV=1 $(shell pkg-config --cflags opencv)
 	LDFLAGS += $(filter-out -lopencv_ts, $(shell pkg-config --libs opencv))
-	BIN += bin/im2rec
+	#BIN += bin/im2rec
 else
 	CFLAGS+= -DMXNET_USE_OPENCV=0
 endif
