@@ -49,9 +49,9 @@ ifndef DLPACK_PATH
 	DLPACK_PATH = $(ROOTDIR)/3rdparty/dlpack
 endif
 
-ifndef AMALGAMATION_PATH
-	AMALGAMATION_PATH = $(ROOTDIR)/amalgamation
-endif
+#ifndef AMALGAMATION_PATH
+#	AMALGAMATION_PATH = $(ROOTDIR)/amalgamation
+#endif
 
 ifneq ($(USE_OPENMP), 1)
 	export NO_OPENMP = 1
