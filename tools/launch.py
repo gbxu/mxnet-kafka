@@ -35,7 +35,8 @@ def dmlc_opts(opts):
             '--num-servers', str(opts.num_servers),
             '--cluster', opts.launcher,
             '--host-file', opts.hostfile,
-            '--sync-dst-dir', opts.sync_dst_dir]
+            '--sync-dst-dir', opts.sync_dst_dir,
+            '--brokers',opts.brokers] # gbxu
 
     # convert to dictionary
     dopts = vars(opts)
@@ -50,7 +51,7 @@ def dmlc_opts(opts):
         print("Can't load dmlc_tracker package.  Perhaps you need to run")
         print("    git submodule update --init --recursive")
         raise
-    dmlc_opts = opts.get_opts(args)
+    dmlc_opts = opts.get_opts(args) # dmlc-core/dmlc_tracker/opts.py
     return dmlc_opts
 
 
@@ -92,12 +93,13 @@ def main():
     parser.add_argument('-b', '--brokers', required=True, type=str,
                         help = 'kafka bootstrap-server ')# gbxu
 
-    args, unknown = parser.parse_known_args()
+    args, unknown = parser.parse_known_args() # 1 parser
+    print(args.brokers) # debug
     args.command += unknown
     if args.num_servers is None:
         args.num_servers = args.num_workers
 
-    args = dmlc_opts(args)
+    args = dmlc_opts(args) # 2 convert
 
     if args.host_file is None or args.host_file == 'None':
       if args.cluster == 'yarn':
@@ -114,7 +116,7 @@ def main():
     else:
       if args.cluster == 'ssh':
           from dmlc_tracker import ssh
-          ssh.submit(args)
+          ssh.submit(args) # 3 dmlc-core/dmlc_tracker/ssh.py
       elif args.cluster == 'mpi':
           from dmlc_tracker import mpi
           mpi.submit(args)
